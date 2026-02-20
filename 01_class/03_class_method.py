@@ -13,7 +13,7 @@ class User:
         self.name = name
         self.role = role if role else self.default_role
 
-    @classmethod
+    @classmethod # 객체 없이도 호출 가능
     def from_string(cls, text):
         """
         TODO:
@@ -23,9 +23,11 @@ class User:
         예:
         "홍길동,ADMIN"
         """
-        pass
+        name, role = text.split(",")
+        user = User(name, role)
+        return user
 
-    @classmethod
+    @classmethod # 객체 없이도 호출 가능
     def change_default_role(cls, new_role):
         cls.default_role = new_role
 
@@ -33,7 +35,7 @@ class User:
 if __name__ == "__main__":
     User.change_default_role("GUEST")
     u = User("김철수")
-    print(u.role)
+    print(u.name, u.role)
 
     u2 = User.from_string("홍길동,ADMIN")
     print(u2.name, u2.role)

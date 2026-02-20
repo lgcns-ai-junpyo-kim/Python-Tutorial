@@ -13,11 +13,11 @@ class BankAccount:
         self._balance = 0
         self.balance = balance  # setter를 통하도록
 
-    @property
+    @property # getter와 유사한 역할
     def balance(self):
         return self._balance
 
-    @balance.setter
+    @balance.setter # setter와 유사한 역할
     def balance(self, value):
         """
         TODO:
