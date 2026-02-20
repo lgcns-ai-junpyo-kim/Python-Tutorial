@@ -24,7 +24,10 @@ class BankAccount:
         - value가 int가 아니면 TypeError 발생
         - 0보다 작으면 ValueError 발생
         """
-
+        if not isinstance(value, int):
+            raise TypeError("입력값은 int 자료형이어야 합니다.")
+        if value < 0:
+            raise ValueError("입력값은 0보다 작을 수 없습니다.")
         self._balance = value  # 현재는 검증이 없음 (일부러 틀림)
 
     def deposit(self, amount):
@@ -38,3 +41,4 @@ if __name__ == "__main__":
 
     # 아래를 통과하지 못하도록 수정하세요
     acc.balance = -100
+    print(acc.balance)
