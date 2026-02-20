@@ -16,6 +16,7 @@ class Timer:
         TODO:
         시작 시간을 저장하세요.
         """
+        self.start = time.time()
         return self
 
     def __exit__(self, exc_type, exc_val, exc_tb):
@@ -24,8 +25,8 @@ class Timer:
         종료 시간을 구해서
         실행 시간을 출력하세요.
         """
-        
-        pass
+        end = time.time()
+        print(f"실행 시간: {end - self.start:.4f}초")
 
 
 if __name__ == "__main__":
