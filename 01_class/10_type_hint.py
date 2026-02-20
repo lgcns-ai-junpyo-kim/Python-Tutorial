@@ -21,7 +21,7 @@ def add(a: int, b: int) -> int:
     return a + b
 
 
-def greet(name: str, age: Optional[int]) -> int:
+def greet(name: str, age: Optional[int]) -> str:
     """
     TODO:
     - name은 str
