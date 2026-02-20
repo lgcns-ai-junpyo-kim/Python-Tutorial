@@ -9,6 +9,9 @@
 
 import time
 
+"""
+decorator: 기존 함수를 수정하지 않고 기능을 덧붙이는 장치
+"""
 
 def logging_decorator(func):
     """
@@ -20,9 +23,9 @@ def logging_decorator(func):
 
     def wrapper():
         print("[LOG] 함수 시작")
-        func()
+        result = func()
         print("[LOG] 함수 종료")
-        # 현재는 반환값을 돌려주지 않음 (일부러 틀림)
+        return result
 
     return wrapper
 
@@ -44,9 +47,9 @@ def timer_decorator(func):
     - *args, **kwargs를 사용해야 합니다.
     """
 
-    def wrapper():
+    def wrapper(*args, **kwargs):
         start = time.time()
-        result = func()  # 현재는 인자를 못 받음 (일부러 틀림)
+        result = func(*args,**kwargs)
         end = time.time()
         print(f"실행 시간: {end - start:.6f}초")
         return result
