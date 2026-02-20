@@ -10,7 +10,9 @@ from abc import ABC, abstractmethod
 
 
 class Animal(ABC):
-
+    def __init__(self, sound):
+        self.sound = sound
+        
     @abstractmethod
     def speak(self):
         pass
@@ -22,7 +24,9 @@ class Dog(Animal):
     speak 메소드를 구현하세요.
     "멍멍"을 출력하도록 하세요.
     """
-    pass
+    def speak(self):
+        print(self.sound)
+        return
 
 
 class Cat(Animal):
@@ -31,12 +35,14 @@ class Cat(Animal):
     speak 메소드를 구현하세요.
     "야옹"을 출력하도록 하세요.
     """
-    pass
-
+    sound = "야옹"
+    def speak(self):
+        print(self.sound)
+        return
 
 if __name__ == "__main__":
-    d = Dog()
+    d = Dog("멍멍")
     d.speak()
 
-    c = Cat()
+    c = Cat("야옹")
     c.speak()

@@ -8,7 +8,7 @@ import re
 
 class Validator:
 
-    @staticmethod
+    @staticmethod # 객체 상태와 무관하지만 user 정보를 처리하는 역할을 수행할 때 보통 사용
     def is_email(value):
         """
         TODO:

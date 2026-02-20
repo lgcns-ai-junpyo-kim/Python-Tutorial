@@ -27,7 +27,7 @@ class User:
         user = User(name, role)
         return user
 
-    @classmethod # 객체 없이도 호출 가능
+    @classmethod # class 자체 정보를 수정하고 싶을 때 이용
     def change_default_role(cls, new_role):
         cls.default_role = new_role
 
