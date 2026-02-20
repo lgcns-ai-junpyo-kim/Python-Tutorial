@@ -11,7 +11,7 @@
 from typing import Optional
 
 
-def add(a, b):
+def add(a: int, b: int) -> int:
     """
     TODO:
     타입 힌트를 추가하세요.
@@ -21,7 +21,7 @@ def add(a, b):
     return a + b
 
 
-def greet(name, age=None):
+def greet(name: str, age: Optional[int]) -> int:
     """
     TODO:
     - name은 str
@@ -33,7 +33,7 @@ def greet(name, age=None):
     return f"{name}님 안녕하세요."
 
 
-def average(numbers):
+def average(numbers: list[int]) -> float:
     """
     TODO:
     - numbers는 list[int]
@@ -42,7 +42,7 @@ def average(numbers):
     return sum(numbers) / len(numbers)
 
 
-def count_words(texts):
+def count_words(texts: list[str]) -> dict[str,int]:
     """
     TODO:
     - texts는 list[str]
