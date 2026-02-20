@@ -10,12 +10,13 @@ class Multiplier:
     def __init__(self, number):
         self.number = number
 
-    def __call__(self, value):
+    def __call__(self, value): # 객체를 함수처럼 호출할 수 있도록 함
         """
         TODO:
         value * self.number 를 반환하도록 수정하세요.
         """
-        return value  # 일부러 틀림
+        output = value * self.number
+        return output  # 일부러 틀림
 
 
 if __name__ == "__main__":
