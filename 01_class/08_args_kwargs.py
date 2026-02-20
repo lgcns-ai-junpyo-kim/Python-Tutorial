@@ -14,7 +14,8 @@ def add_all(*args):
     - args는 튜플이라는 것을 확인해보세요.
     """
     print("args:", args)
-    return 0  # 일부러 틀림
+    total = sum(args)
+    return total  # 일부러 틀림
 
 
 def print_user(**kwargs):
@@ -23,7 +24,8 @@ def print_user(**kwargs):
     - kwargs는 딕셔너리입니다.
     - key와 value를 출력하도록 수정하세요.
     """
-    print("kwargs:", kwargs)
+    print("kwargs key:", kwargs.keys())
+    print("kwargs value:", kwargs.values())
 
 
 # ---------------------------------
@@ -40,7 +42,10 @@ def example_function(a, b, *args, **kwargs):
     args: (3, 4)
     kwargs: {'x': 10, 'y': 20}
     """
-    pass
+    print(f"a: {a}")
+    print(f"b: {b}")
+    print(f"args: {args}")
+    print(f"kwargs: {kwargs}")
 
 
 if __name__ == "__main__":
