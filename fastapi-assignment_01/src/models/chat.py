@@ -11,4 +11,14 @@
 - 실습에서 Pydantic 모델을 직접 구현할 때 사용합니다.
 """
 
-raise NotImplementedError("TODO: src/models/chat.py의 ChatRequest/ChatResponse를 구현하세요.")
+from pydantic import BaseModel, UUID4, Field
+
+class ChatRequest(BaseModel):
+    session_id: UUID4
+    query_id: int
+    streaming: bool
+    message: str = Field(min_length=1)
+
+
+class ChatResponse(BaseModel):
+    message: str
