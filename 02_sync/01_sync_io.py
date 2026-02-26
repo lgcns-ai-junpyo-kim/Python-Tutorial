@@ -1,8 +1,8 @@
 import time
 
-def download(file_name):
+async def download(file_name):
     print(f"{file_name} 다운로드 시작")
-    time.sleep(2)
+    await time.sleep(2)
     print(f"{file_name} 다운로드 완료")
 
 start = time.time()
