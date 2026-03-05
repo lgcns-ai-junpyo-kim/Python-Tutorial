@@ -79,7 +79,7 @@ class ChatCompletionService:
         )
 
         result = ChatCompletionResult(
-            final_answer = final_answer,
+            answer = final_answer,
             documents = documents,
             intent = intent,
             session_id = request.session_id,
@@ -126,6 +126,10 @@ class ChatCompletionService:
             yield f"data: {json.dumps({'chunk': text}, ensure_ascii=False)}\n\n"
 
         final_answer = "".join(chunks)
+        documents_json = [
+            {"title": d.title, "content": d.content, "page_number": d.page_number}
+            for d in documents
+        ]
 
         self._history_service.create_history(
             ChatHistoryCreateRequest(
@@ -139,7 +143,7 @@ class ChatCompletionService:
 
         final_payload = {
             "final_answer": final_answer,
-            "documents": documents,
+            "documents": documents_json,
             "intent": intent,
             "session_id": request.session_id,
             "query_id": request.query_id,

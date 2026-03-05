@@ -170,8 +170,16 @@ class EndpointChatModel(BaseChatModel):
         # Step 1. httpx.post로 엔드포인트를 호출하세요.
         # Step 2. raise_for_status + response.json 처리하세요.
         # Step 3. HTTPStatusError/JSONDecodeError/HTTPError를 로깅 후 UpstreamServiceError로 변환하세요.
+        timeout = httpx.Timeout(
+            timeout=self.request_timeout,
+            connect=10.0,
+            read=self.request_timeout,
+            write=self.request_timeout,
+            pool=self.request_timeout,
+        )
+        limits = httpx.Limits(max_keepalive_connections=5, max_connections=10)
         try:
-            with httpx.Client(timeout=self.request_timeout) as client:
+            with httpx.Client(timeout=timeout,limits=limits) as client:
                 response = client.post(
                     self.endpoint,
                     headers=self.headers,
