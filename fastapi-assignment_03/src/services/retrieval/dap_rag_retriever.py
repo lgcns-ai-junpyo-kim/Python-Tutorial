@@ -59,8 +59,9 @@ def dap_rag_documents(
             response.text[:500],
         )
     response.raise_for_status()
-    results = response.json()
-    
+    body = response.json()
+    results = body.get("data", []) if isinstance(body, dict) else body
+
     documents: list[RagDocument] = []
 
     for result in results:
