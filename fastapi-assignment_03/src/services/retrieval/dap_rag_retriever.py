@@ -9,9 +9,12 @@
 사용 시점:
 - 검색기를 통과한 후 분기 흐름과 응답 포맷을 검증할 때 사용합니다.
 """
+import logging
 import os
 import requests
 from src.models.chat import RagDocument
+
+logger = logging.getLogger(__name__)
 
 VECTOR_DB_URL = os.getenv("VECTOR_DB_PATH") or "http://35.216.126.198:30870/api/v1/search/vectordb"
 ACCESS_KEY = os.getenv("ACCESS_KEY") or "9507640340643580a33665b9e2d214d28cabb8bd7926b1c930229b6bc6e38abb"
@@ -49,6 +52,12 @@ def dap_rag_documents(
     }
 
     response = requests.post(VECTOR_DB_URL, json=payload, timeout=10)
+    if not response.ok:
+        logger.error(
+            "DAP API error status=%s body=%s",
+            response.status_code,
+            response.text[:500],
+        )
     response.raise_for_status()
     results = response.json()
     
