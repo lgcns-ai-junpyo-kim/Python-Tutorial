@@ -37,8 +37,8 @@ def search_documents(request: SearchRequest) -> SearchResponse:
     """DAP 벡터 DB에서 관련 문서를 검색합니다."""
     documents = dap_rag_documents(
         question=request.question,
-        req_access_key=request.access_key,
-        req_collection_alias=request.collection_alias,
+        access_key=request.access_key,
+        collection_alias=request.collection_alias,
         topk=request.topk,
         hybrid_yn=request.hybrid_yn,
         alpha=request.alpha,

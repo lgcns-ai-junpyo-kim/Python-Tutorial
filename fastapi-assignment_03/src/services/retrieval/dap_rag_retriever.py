@@ -13,14 +13,14 @@ import os
 import requests
 from src.models.chat import RagDocument
 
-vector_db_url = os.getenv("VECTOR_DB_PATH") or "http://35.216.126.198:30870/api/v1/search/vectordb"
-access_key = os.getenv("ACCESS_KEY") or "9507640340643580a33665b9e2d214d28cabb8bd7926b1c930229b6bc6e38abb"
-collection_alias = os.getenv("COLLECTION_ALIAS") or "PJT20260025_pipeline_test_kjp"
+VECTOR_DB_URL = os.getenv("VECTOR_DB_PATH") or "http://35.216.126.198:30870/api/v1/search/vectordb"
+ACCESS_KEY = os.getenv("ACCESS_KEY") or "9507640340643580a33665b9e2d214d28cabb8bd7926b1c930229b6bc6e38abb"
+COLLECTION_ALIAS = os.getenv("COLLECTION_ALIAS") or "PJT20260025_pipeline_test_kjp"
 
 def dap_rag_documents(
     question: str,
-    req_access_key: str | None = None,
-    req_collection_alias: str | None = None,
+    access_key: str | None = None,
+    collection_alias: str | None = None,
     topk: int = 5,
     hybrid_yn: bool = True,
     alpha: float = 0.5,
@@ -40,15 +40,15 @@ def dap_rag_documents(
         list[RagDocument]
     """
     payload = {
-        "access_key": req_access_key or access_key,
-        "collection_alias": req_collection_alias or collection_alias,
+        "access_key": access_key or ACCESS_KEY,
+        "collection_alias": collection_alias or COLLECTION_ALIAS,
         "question": question,
         "topK": topk,
         "hybrid_yn": hybrid_yn,
         "alpha": alpha,
     }
 
-    response = requests.post(vector_db_url, json=payload, timeout=10)
+    response = requests.post(VECTOR_DB_URL, json=payload, timeout=10)
     response.raise_for_status()
     results = response.json()
     
