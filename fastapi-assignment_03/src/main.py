@@ -19,6 +19,7 @@ import uvicorn
 
 from src.api.chat import router as chat_router
 from src.api.histories import router as histories_router
+from src.api.search import router as search_router
 from src.core.config import AppSettings, load_app_settings
 from src.core.db import initialize_database
 from src.core.logging_config import configure_logging
@@ -46,6 +47,7 @@ def create_app(settings: AppSettings | None = None) -> FastAPI:
     register_error_middleware(app)
     app.include_router(chat_router)
     app.include_router(histories_router)
+    app.include_router(search_router)
     return app
 
 
