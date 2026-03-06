@@ -56,7 +56,7 @@ app = create_app()
 
 def main() -> None:
     """로컬 개발 서버를 실행합니다."""
-    uvicorn.run("src.main:app", host="127.0.0.1", port=8000, reload=False)
+    uvicorn.run("src.main:app", host="0.0.0.0", port=8000, reload=False)
 
 
 if __name__ == "__main__":
