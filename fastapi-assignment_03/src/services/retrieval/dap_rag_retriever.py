@@ -16,7 +16,7 @@ from src.models.chat import RagDocument
 
 logger = logging.getLogger(__name__)
 
-VECTOR_DB_URL = os.getenv("VECTOR_DB_PATH") or "http://35.216.126.198:30870/api/v1/search/vectordb"
+VECTOR_DB_URL = os.getenv("VECTOR_DB_PATH") or "http://35.216.126.198:30585/api/v1/search/vectordb"
 ACCESS_KEY = os.getenv("ACCESS_KEY") or "9507640340643580a33665b9e2d214d28cabb8bd7926b1c930229b6bc6e38abb"
 COLLECTION_ALIAS = os.getenv("COLLECTION_ALIAS") or "PJT20260025_pipeline_test_kjp"
 
