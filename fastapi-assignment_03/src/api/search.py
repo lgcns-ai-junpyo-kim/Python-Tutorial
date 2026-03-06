@@ -21,6 +21,11 @@ router = APIRouter(prefix="/api/v1", tags=["search"])
 
 class SearchRequest(BaseModel):
     question: str
+    access_key: str | None = None
+    collection_alias: str | None = None
+    topk: int = 5
+    hybrid_yn: bool = True
+    alpha: float = 0.5
 
 
 class SearchResponse(BaseModel):
@@ -30,5 +35,12 @@ class SearchResponse(BaseModel):
 @router.post("/search", response_model=SearchResponse)
 def search_documents(request: SearchRequest) -> SearchResponse:
     """DAP 벡터 DB에서 관련 문서를 검색합니다."""
-    documents = dap_rag_documents(request.question)
+    documents = dap_rag_documents(
+        question=request.question,
+        req_access_key=request.access_key,
+        req_collection_alias=request.collection_alias,
+        topk=request.topk,
+        hybrid_yn=request.hybrid_yn,
+        alpha=request.alpha,
+    )
     return SearchResponse(data=documents)

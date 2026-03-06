@@ -17,23 +17,35 @@ vector_db_url = os.getenv("VECTOR_DB_PATH") or "http://35.216.126.198:30870/api/
 access_key = os.getenv("ACCESS_KEY") or "9507640340643580a33665b9e2d214d28cabb8bd7926b1c930229b6bc6e38abb"
 collection_alias = os.getenv("COLLECTION_ALIAS") or "PJT20260025_pipeline_test_kjp"
 
-def dap_rag_documents(question: str) -> list[RagDocument]:
+def dap_rag_documents(
+    question: str,
+    req_access_key: str | None = None,
+    req_collection_alias: str | None = None,
+    topk: int = 5,
+    hybrid_yn: bool = True,
+    alpha: float = 0.5,
+) -> list[RagDocument]:
     """
     DAP 검색 API 응답을 RagDocument 리스트로 변환합니다.
 
     Parameters:
-        search_response: DAP 검색 API의 JSON 응답(dict)
+        question: 검색 질문
+        req_access_key: DAP 액세스 키 (None이면 환경변수 사용)
+        req_collection_alias: 컬렉션 alias (None이면 환경변수 사용)
+        topk: 검색 결과 수
+        hybrid_yn: 하이브리드 검색 여부
+        alpha: 하이브리드 검색 가중치
 
     Returns:
         list[RagDocument]
     """
     payload = {
-        "access_key": access_key,
-        "collection_alias": collection_alias,
+        "access_key": req_access_key or access_key,
+        "collection_alias": req_collection_alias or collection_alias,
         "question": question,
-        "topK": 5,         
-        "hybrid_yn": True,
-        "alpha": 0.5,
+        "topK": topk,
+        "hybrid_yn": hybrid_yn,
+        "alpha": alpha,
     }
 
     response = requests.post(vector_db_url, json=payload, timeout=10)
