@@ -60,6 +60,7 @@ def dap_rag_documents(
         )
     response.raise_for_status()
     body = response.json()
+    logger.debug("DAP raw response: %s", str(body)[:500])
     results = body.get("data", []) if isinstance(body, dict) else body
 
     documents: list[RagDocument] = []
