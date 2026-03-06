@@ -19,6 +19,7 @@ from src.services.llm_gateway import LlmGateway
 from src.services.rag_graph.state import ChatGraphState
 from src.services.rag_graph.state_keys import KEY_DOCUMENTS, KEY_INTENT, KEY_USER_MESSAGE
 from src.services.retrieval.mock_rag_store import get_mock_rag_documents
+from src.services.retrieval.dap_rag_retriever import dap_rag_documents
 
 
 class ClassifyIntentNode:
@@ -49,6 +50,17 @@ class MockRagNode:
         state[KEY_DOCUMENTS] = get_mock_rag_documents()
         return state
 
+class DapRagNode:
+    """DAP 출력 문서를 상태에 주입하는 노드."""
+
+    def __call__(self, state: ChatGraphState) -> ChatGraphState:
+        """검색 문서 n개를 상태에 기록합니다."""
+        user_message = state.get(KEY_USER_MESSAGE, "")
+        if not isinstance(user_message, str):
+            user_message = str(user_message)
+
+        state[KEY_DOCUMENTS] = dap_rag_documents(user_message)
+        return state
 
 class GenerateNode:
     """최종 생성 이전 공통 정리 노드."""

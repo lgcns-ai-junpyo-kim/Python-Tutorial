@@ -17,6 +17,7 @@ from src.services.rag_graph.nodes import (
     ClassifyIntentNode,
     GenerateNode,
     MockRagNode,
+    DapRagNode,
     route_after_intent,
 )
 from src.services.rag_graph.state import ChatGraphState
@@ -26,7 +27,8 @@ def build_chat_graph(llm_gateway: LlmGateway):
     """의도 분기 그래프를 생성하고 컴파일합니다."""
     graph = StateGraph(ChatGraphState)
     graph.add_node("classify_intent", ClassifyIntentNode(llm_gateway))
-    graph.add_node("rag_node", MockRagNode())
+    graph.add_node("mock_rag_node", MockRagNode())
+    graph.add_node("rag_node", DapRagNode())
     graph.add_node("generate_node", GenerateNode())
 
     graph.add_edge(START, "classify_intent")
